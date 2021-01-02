@@ -21,11 +21,13 @@ try:
 
 	def progress(current, total, width=80):
 	  progress_message = "Downloading: %d%% [%d / %d] bytes" % (current / total * 100, current, total)
+	  cur = current/1000000
+	  tt = total/1000000
 	  root.update()
 	  if b1['text']=="100":
 	  	b1.config(text="Downloading 100%")
 	  else:
-	  	b1.config(text=f"{progress_message[0:16]}")
+	  	b1.config(text=f'{progress_message[0:16]} [ {"%.2f"%cur} MB / {"%.2f"%tt} MB ]')
 	  sys.stdout.flush()
 
 	def er():
@@ -36,6 +38,7 @@ try:
 		en2.config(state=NORMAL)
 		b2.config(state=NORMAL)
 	def dwnn():
+		os.system(f'echo {(dwn.get())}>data1.data')
 		try:
 			lb1.config(state=DISABLED)
 			lb2.config(state=DISABLED)
@@ -62,7 +65,13 @@ try:
 		f.close()
 	except:
 		loc.set('')
-	dwn.set('https://github.com/AadityaKandel/AutoWriter/archive/main.zip')
+	try:
+		f = open('data1.data','r+')
+		for words in f:
+			pass
+		dwn.set(words[0:-1])
+	except:
+		dwn.set('https://github.com/AadityaKandel/AutoWriter/archive/main.zip')
 
 	en1 = Entry(f1,textvariable = dwn,bg = "white",fg = "black",font ="comicsansms 11 bold",width=80)
 	lb1 = Label(f1,text="Url: ",bg = "black",fg = "white",font ="comicsansms 11 bold")
