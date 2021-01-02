@@ -70,6 +70,7 @@ try:
 		for words in f:
 			pass
 		dwn.set(words[0:-1])
+		f.close()
 	except:
 		dwn.set('https://github.com/AadityaKandel/AutoWriter/archive/main.zip')
 
