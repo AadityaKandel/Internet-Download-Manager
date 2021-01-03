@@ -4,12 +4,13 @@ try:
 	import sys
 	import os
 	from tkinter.filedialog import *
+	import time
 
 	root = Tk()
-	root.minsize(790,148)
-	root.maxsize(790,148)
+	root.minsize(790,210)
+	root.maxsize(790,210)
 
-	root.title("IDM BY AADITYA KANDEL")
+	root.title("IDM BY AK HACKS")
 	f1 = Frame(borderwidth=10,bg="black")
 	f2 = Frame(borderwidth=10,bg="black")
 
@@ -28,10 +29,13 @@ try:
 	  	b1.config(text="Downloading 100%")
 	  else:
 	  	b1.config(text=f'{progress_message[0:16]} [ {"%.2f"%cur} MB / {"%.2f"%tt} MB ]')
+	  	c = "%d" % (current / total * 100)
+	  	l11.config(bg = "green",width=f"{c}")
 	  sys.stdout.flush()
 
 	def er():
 		b1.config(text="Download",command=dwnn)
+		l11.config(width=0,bg="black")
 		lb1.config(state=NORMAL)
 		lb2.config(state=NORMAL)
 		en1.config(state=NORMAL)
@@ -50,10 +54,25 @@ try:
 			root.update()
 			d = wget.download(url,f"{(loc.get())}",bar=progress)
 			root.update()
+			b1.config(text="Checking..")
+			root.update()
+			l11.config(width="104")
+			time.sleep(.6)
+			b1.config(text = "Checking....")
+			root.update()
+			l11.config(width="108")
+			time.sleep(.6)
 			b1.config(text="Successfully Downloaded [ Press Here To Continue ]",command = er,state=NORMAL)
+			l11.config(width="120")
 		except:
 			b1.config(text="Error..",command=er)
 			b1.config(state=NORMAL)
+	l11 = Label(text="",bg="black")
+	ll = Label(text="",bg="grey11",width=120)
+	ll.pack()
+	l11.pack(anchor = "w")
+	lll = Label(text="",bg="grey11",width=120)
+	lll.pack()
 
 	dwn = StringVar()
 	loc = StringVar()
